@@ -31,6 +31,7 @@ function onInput(session, type, data, arg) {
     		  session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_s.wav");
     	    }
         }
+        if (command != "") {
         //session.execute("sleep", "2000");
         // session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav");
         // var newCommand = "";
@@ -46,6 +47,7 @@ function onInput(session, type, data, arg) {
         e.fire();
 
         session.execute("detect_speech", "resume");
+    }
     return( false );
 }
 
