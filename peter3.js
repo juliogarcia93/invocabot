@@ -65,22 +65,41 @@ session.execute("record_session", "/tmp/foo.wav")
 
 outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
 
-if (session.ready()){
-        session.answer();
-        session.execute("sleep", "5000");
-        session.execute("detect_speech", "pocketsphinx invocabot invocabot");
-        session.execute("divert_events", "on");
-        
-        if (outSession.ready()) {
-        //     outSession.answer();
-        bridge(session, outSession);
-	    ttsSpeak(outSession, "The call is currently being recorded");
-        console_log("CONSOLE", "The call is currently being recorded");
 
-        while (session.ready()) {
-          session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-        }
+session1 = new Session();
+session1.originate(session1, "{ignore_early_media=true}sofia/gateway/ 
+gw_outbound/***REMOVED***");
+
+session2 = new Session();
+session2.originate(session2, "sofia/gateway/gw_outbound/***REMOVED***");
+
+bridge(session1, session2);
+session.hangup();
+while (session1.ready() && session2.ready()) { 
+    session1.execute("detect_speech", "pocketsphinx invocabot invocabot");
+    ttsSpeak(session2, "The call is currently being recorded");
+    while (session.ready()) {
+      session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
     }
+}
+
+
+// if (session.ready()){
+//         session.answer();
+//         session.execute("sleep", "5000");
+//         session.execute("detect_speech", "pocketsphinx invocabot invocabot");
+//         session.execute("divert_events", "on");
+        
+//         if (outSession.ready()) {
+//         //     outSession.answer();
+//         bridge(session, outSession);
+// 	    ttsSpeak(outSession, "The call is currently being recorded");
+//         console_log("CONSOLE", "The call is currently being recorded");
+
+//         while (session.ready()) {
+//           session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+//         }
+//     }
     
 
-}
+// }
