@@ -67,10 +67,10 @@ var originate_options = "ignore_early_media=true";
 
 
 session1 = new Session();
-session1.originate(session1, "{ignore_early_media=true}sofia/gateway/gw_outbound/***REMOVED***");
+session.originate(session1, "{ignore_early_media=true}sofia/gateway/gw_outbound/***REMOVED***");
 
 session2 = new Session();
-session2.originate(session2, "sofia/gateway/gw_outbound/***REMOVED***");
+session.originate(session2, "sofia/gateway/gw_outbound/***REMOVED***");
 
 bridge(session1, session2);
 session.hangup();
