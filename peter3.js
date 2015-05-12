@@ -35,7 +35,7 @@ function onInput(session, type, data, arg) {
         // session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav");
         // var newCommand = "";
         // newCommand = command.slice(10);
-        // console_log("CONSOLE", "Command: " + newCommand);
+        console_log("CONSOLE", "Command: " + command);
         if (command != "" )
         {
             ttsSpeak(session, command);
