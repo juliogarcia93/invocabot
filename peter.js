@@ -13,15 +13,11 @@ var ttstimer = "soft"; // TTS timer type
 if(session.ready()) {
     session.answer()
     ttsSpeak(session, "Hello capstone team");
-
     var buff = "***REMOVED***";
     route = "sofia/gateway/gw_outbound/"+buff;
     session.execute("bridge", route);
-    session.waitForAnswer(5000);
-    console_log("notice", "Disconnect cause: " + session.cause + "\n");
-    
+//    session.waitForAnswer(5000);
     session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput);
-
 }
 
 function onInput(session, type, data, arg) {
