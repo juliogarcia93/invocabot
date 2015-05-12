@@ -53,6 +53,7 @@ function onInput(session, type, data, arg) {
 
 function bridgeCallback ( session, type, dtmf, user_data) {
         console_log("CONSOLE", "BEGINNING VOICE RECOGNITION");
+        session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput);
         return false;
 }
 
@@ -75,8 +76,7 @@ if (session.ready()){
         
         if (outSession.ready()) {
         //     outSession.answer();
-        //bridge(session, outSession);
-        session.execute("bridge", "sofia/gateway/gw_outbound/***REMOVED***");
+        bridge(session, outSession, bridgeCallback);
 	    ttsSpeak(outSession, "The call is currently being recorded");
         console_log("CONSOLE", "The call is currently being recorded");
 
