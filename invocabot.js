@@ -47,6 +47,13 @@ function onInput(session, type, data, arg) {
 				e = new Event("custom", "message");
 				e.addBody(session.uuid + command);
 				e.fire();
+
+				if (command.indexOf('APPOINTMENT') > -1 || command.indexOf('MEETING')) {
+					ttsSpeak(session, "I have successfully scheduled your appointment.")
+				}
+				if (command.indexOf('SCRATCH') > -1) {
+					ttsSpeak(session, "I have deleted your last appointment.")
+				}
 			}
 		}
 
