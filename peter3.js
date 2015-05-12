@@ -74,10 +74,11 @@ if (session.ready()){
         session.execute("detect_speech", "pocketsphinx invocabot invocabot");
         session.execute("divert_events", "on");
         
-        if (outSession.ready()) {
-            outSession.answer();
-	    ttsSpeak(outSession, "The call is currently being recorded");
+        // if (outSession.ready()) {
+        //     outSession.answer();
         bridge(session, outSession, bridgeCallback);
+	    ttsSpeak(outSession, "The call is currently being recorded");
+        
 	}
     
     //     while (session.ready() && outSession.ready()) {
