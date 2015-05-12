@@ -45,7 +45,7 @@ function onInput(session, type, data, arg) {
 				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav", halfVolume);
 				invocabot = false;
 				e = new Event("custom", "message");
-				e.addBody(command);
+				e.addBody(session.uuid + " " + command);
 				e.fire();
 			}
 		}
@@ -68,6 +68,9 @@ var originate_options = "ignore_early_media=true";
 
 session.execute("record_session", "/tmp/foo.wav")
 
+var eh = new EventHandler('ALL');
+var evt;
+
 //outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
 
 
@@ -86,8 +89,11 @@ if (session.ready()){
 
 	while (session.ready()) {
 		session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+	       evt = eh.getEvent(60000);
+	       if (evt){
+		   consoleLog('info', 'Got event: ' + evt.serialize() + '\n');
+		   }
 	}
-	//	}
 
 
 }
