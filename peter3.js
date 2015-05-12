@@ -27,15 +27,15 @@ function onInput(session, type, data, arg) {
         if (result)
         {
             command = result.getChild('interpretation').getChild('input').data;
-	    if (command.indexOf('INVOCABOT') > -1) {
-		session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_s.wav");
-	    }
+    	    if (command.indexOf('INVOCABOT') > -1) {
+    		  session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_s.wav");
+    	    }
         }
         session.execute("sleep", "2000");
-        session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav");
-        var newCommand = "";
-        newCommand = command.slice(10);
-        console_log("CONSOLE", "Command: " + newCommand);
+        // session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav");
+        // var newCommand = "";
+        // newCommand = command.slice(10);
+        // console_log("CONSOLE", "Command: " + newCommand);
         session.execute("speak", newCommand);
 
 
