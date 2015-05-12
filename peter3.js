@@ -53,7 +53,7 @@ function onInput(session, type, data, arg) {
 
 function bridgeCallback ( session, type, dtmf, user_data) {
         console_log("CONSOLE", "BEGINNING VOICE RECOGNITION");
-        return true;
+        return false;
 }
 
 /***************** Begin Program *****************/
