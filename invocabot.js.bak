@@ -1,0 +1,56 @@
+include("js_modules/SpeechTools.jm");
+
+function on_dtmf(a, b, c) {}
+
+var dft_min = 40;
+var dft_confirm = 70;
+
+/***************** Initialize The Speech Detector  *****************/
+var asr = new SpeechDetect(session, "pocketsphinx");
+
+/***************** Be more verbose *****************/
+asr.debug = 1;
+
+/***************** Set audio params *****************/
+asr.setAudioBase("/usr/local/freeswitch/sounds/en/us/pizza/");
+asr.setAudioExt(".wav");
+
+/***************** Unload the last grammar whenever we activate a new one *****************/
+//asr.AutoUnload = true;
+
+/***************** Create And Configure The Pizza *****************/
+var invocabot = new Object();
+
+/***************** Delivery Or Take-Out? *****************/
+invocabot.commandObtainer = new SpeechObtainer(asr, 1, 5000);
+invocabot.commandObtainer.setGrammar("pizza_order", "", "result.interpretation.input", dft_min, dft_confirm, true);
+invocabot.commandObtainer.setTopSound("GP-Size");
+invocabot.commandObtainer.setBadSound("GP-NI");
+invocabot.commandObtainer.addItemAlias("Delivery", "Delivery");
+invocabot.commandObtainer.addItemAlias("Takeout,Pickup", "Pickup");
+
+invocabot.get = function(params) {
+    if (!session.ready()) {
+      return false;
+    }
+    var main_items = params.run();      
+    return main_items;
+};
+
+
+/***************** Tie It All Together *****************/
+invocabot.run = function() {
+  for(;;) {
+	  if (!session.ready()) {
+	      break;
+	  }
+	  var result = invocabot.commandObtainer.run();
+	  console_log("info", "SPEECH");
+	  console_log("info", result[0]);
+  };
+};
+
+/***************** Begin Program *****************/
+session.answer();
+invocabot.run();
+asr.stop();

@@ -1,0 +1,14 @@
+#JSGF V1.0;
+
+/**
+  * JSGF Grammar for pizza_toppings
+  */
+
+grammar pizza_toppings;
+
+<toppings1> = [ mango | mushroom | mushrooms | olives | onion | onions | pepperoni | pickle | pickles ];
+<toppings2> = [ pineapple | salami | sausage | shrimp | spinach | ham | anchovy | anchovies | artichoke ];
+<toppings3> = [ artichokes | canadian bacon | everything | [ extra | goat ] cheese | garlic | bell [ peppers | pepper ] ];
+
+public <toppings> = <toppings1> <toppings2> <toppings3>;
+

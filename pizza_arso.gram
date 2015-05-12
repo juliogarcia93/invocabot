@@ -1,0 +1,13 @@
+#JSGF V1.0;
+
+/**
+  * JSGF Grammar for pizza_type
+  */
+
+grammar pizza_type;
+
+<arso> = [ deliver | start over | crust | add [ a ] topping | remove [ a ] topping ];
+
+
+public <type> = <arso>;
+

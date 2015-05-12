@@ -1,0 +1,15 @@
+#JSGF V1.0;
+
+/**
+  * JSGF Grammar for pizza_crust
+  */
+
+grammar pizza_crust;
+
+<handtossed> = [ hand [ tossed ] ];
+<deepdish> = [ [ chicago style ] | deep [ dish ] ];
+<panbaked> = [ pan [ baked ] [ pizza ] ];
+<thin> = [ thin [ crust ] | new york [ style ] ];
+
+public <crust> = <handtossed> <deepdish> <panbaked> <thin>;
+

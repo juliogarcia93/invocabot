@@ -1,0 +1,16 @@
+#JSGF V1.0;
+
+/**
+  * JSGF Grammar for pizza_specialty
+  */
+
+grammar pizza_specialty;
+
+<hawaiian> = [ [ hawaii | hawaiian ] [ pizza ] ];
+<meatlovers> = [ meat [ lovers ] [ pizza ] ];
+<pickle> = [ [ world famous ] pickle [ pizza ] ];
+<dali> = [ [ salvador ] [ dali | dolly ] [ pizza ] ];
+<veggie> = [ [ veggie | vegetarian ] [ pizza ] ];
+
+public <specialty> = [ <hawaiian> | <meatlovers> | <pickle> | <dali> | <veggie> ];
+

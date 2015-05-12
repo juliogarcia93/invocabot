@@ -1,0 +1,10 @@
+#JSGF V1.0;
+
+/**
+  * JSGF Grammar for pizza_order
+  */
+
+grammar pizza_order;
+
+public <delivery> = [ takeout | pickup | delivery ];
+
