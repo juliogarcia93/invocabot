@@ -44,17 +44,10 @@ function onInput(session, type, data, arg) {
 			if (invocabot) {
 				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav", halfVolume);
 				invocabot = false;
+				e = new Event("custom", "message");
+				e.addBody(command);
+				e.fire();
 			}
-			console_log("CONSOLE", "Command: " + command);
-			// if (command != "" )
-			// {
-			//     ttsSpeak(session, command);
-			// }
-
-			e = new Event("custom", "message");
-			e.addBody(command);
-			e.fire();
-
 		}
 
 		session.execute("detect_speech", "resume");
