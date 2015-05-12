@@ -73,10 +73,10 @@ if (session.ready()){
         if (outSession.ready()) {
             outSession.answer();
 	    ttsSpeak(outSession, "The call is currently being recorded");
-//	    bridge(session, outSession);
+        bridge(session, outSession);
 	}
     
         while (session.ready() && outSession.ready()) {
-		session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+		  session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
         }
 }
