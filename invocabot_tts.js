@@ -20,7 +20,6 @@ function onInput(session, type, data, arg) {
     
         session.execute("speak", command);
 
-	    session.execute("speak", command);
 	    // client.write(command);
 	    //session.execute("global_setvar", "command=" + command);
 	    e = new Event("custom", "message");
