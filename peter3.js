@@ -67,8 +67,7 @@ outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+tar
 
 
 session1 = new Session();
-session1.originate(session1, "{ignore_early_media=true}sofia/gateway/ 
-gw_outbound/***REMOVED***");
+session1.originate(session1, "{ignore_early_media=true}sofia/gateway/gw_outbound/***REMOVED***");
 
 session2 = new Session();
 session2.originate(session2, "sofia/gateway/gw_outbound/***REMOVED***");
