@@ -27,7 +27,7 @@ function onInput(session, type, data, arg) {
 	    e.addBody(command);
 	    e.fire();
 	    
- 	session.execute("speech_detect", "resume");	    
+ 	session.execute("detect_speech", "resume");	    
     return( true );
 }
 
