@@ -73,7 +73,7 @@ if (session.ready()){
         
         if (outSession.ready()) {
         //     outSession.answer();
-        bridge(session, outSession, bridgeCallback);
+        bridge(session, outSession);
 	    ttsSpeak(outSession, "The call is currently being recorded");
         console_log("CONSOLE", "The call is currently being recorded");
 
