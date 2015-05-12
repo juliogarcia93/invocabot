@@ -52,7 +52,9 @@ function onInput(session, type, data, arg) {
 }
 
 function bridgeCallback ( session, type, dtmf, user_data) {
-        return true;
+        while (session.ready()) {
+          session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+        }
 }
 
 /***************** Begin Program *****************/
@@ -76,7 +78,7 @@ if (session.ready()){
         bridge(session, outSession);
 	}
     
-        while (session.ready() && outSession.ready()) {
-		  session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-        }
+    //     while (session.ready() && outSession.ready()) {
+		  // session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+    //     }
 }
