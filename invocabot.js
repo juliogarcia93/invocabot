@@ -47,6 +47,13 @@ function onInput(session, type, data, arg) {
 				e = new Event("custom", "message");
 				e.addBody(session.uuid + " " + command);
 				e.fire();
+
+				if (command.indexOf('APPOINTMENT') > -1 || command.indexOf('MEETING')) {
+					ttsSpeak(session, "I have successfully scheduled your appointment.")
+				}
+				if (command.indexOf('SCRATCH') > -1) {
+					ttsSpeak(session, "I have deleted your last appointment.")
+				}
 			}
 		}
 
@@ -66,10 +73,10 @@ var targetnumber = "***REMOVED***";
 var gateway = "gw_outbound";
 var originate_options = "ignore_early_media=true";
 
-session.execute("record_session", "/tmp/foo.wav")
-
 var eh = new EventHandler('ALL');
 var evt;
+
+session.execute("record_session", "/tmp/foo.wav");
 
 //outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
 
@@ -89,11 +96,9 @@ if (session.ready()){
 
 	while (session.ready()) {
 		session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-	       evt = eh.getEvent(60000);
-	       if (evt){
-		   consoleLog('info', 'Got event: ' + evt.serialize() + '\n');
-		   }
+	   evt = eh.getEvent(60000);
+	   if (evt){
+       		consoleLog('info', 'Got event: ' + evt.serialize() + '\n');
+   		}
 	}
-
-
 }
