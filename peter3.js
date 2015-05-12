@@ -36,8 +36,10 @@ function onInput(session, type, data, arg) {
         // var newCommand = "";
         // newCommand = command.slice(10);
         // console_log("CONSOLE", "Command: " + newCommand);
-        ttsSpeak(session, command);
-
+        if (command != "" )
+        {
+            ttsSpeak(session, command);
+        }
 
         e = new Event("custom", "message");
         e.addBody(command);
