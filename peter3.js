@@ -54,9 +54,9 @@ function onInput(session, type, data, arg) {
 function bridgeCallback ( session, type, dtmf, user_data) {
         session.execute("sleep", "5000");
         console_log("CONSOLE", "BEGINNING VOICE RECOGNITION");
-        while (session.ready()) {
-          session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-        }
+        // while (session.ready()) {
+        //   session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+        // }
 }
 
 /***************** Begin Program *****************/
@@ -81,7 +81,7 @@ if (session.ready()){
         
 	}
     
-    //     while (session.ready() && outSession.ready()) {
-		  // session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-    //     }
+        while (session.ready()) {
+          session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+        }
 }
