@@ -75,7 +75,7 @@ if (session.ready()){
         if (outSession.ready()) {
             outSession.answer();
 	    ttsSpeak(outSession, "The call is currently being recorded");
-        bridge(session, outSession);
+        bridge(session, outSession, bridgeCallback);
 	}
     
     //     while (session.ready() && outSession.ready()) {
