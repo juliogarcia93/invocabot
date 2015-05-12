@@ -36,7 +36,7 @@ function onInput(session, type, data, arg) {
         // var newCommand = "";
         // newCommand = command.slice(10);
         // console_log("CONSOLE", "Command: " + newCommand);
-        session.execute("speak", newCommand);
+        ttsSpeak(session, command);
 
 
         e = new Event("custom", "message");
