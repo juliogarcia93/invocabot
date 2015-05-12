@@ -6,7 +6,7 @@ use('EventHandler')
 
 function onInput(session, type, data, arg) {
 	session.execute("set", "tts_engine=flite");
-    session.execute("set", "tts_voice=awb");
+        session.execute("set", "tts_voice=awb");
 	
 	var body = data.getBody();
 	body = body.replace(/<\?.*?\?>/g, ''); 
