@@ -46,7 +46,7 @@ function onInput(session, type, data, arg) {
         e.fire();
 
         session.execute("detect_speech", "resume");
-    return( true );
+    return( false );
 }
 
 function bridgeCallback ( session, type, dtmf, user_data) {
