@@ -53,7 +53,7 @@ function onInput(session, type, data, arg) {
 
 function bridgeCallback ( session, type, dtmf, user_data) {
         console_log("CONSOLE", "BEGINNING VOICE RECOGNITION");
-        session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput);
+        //session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput);
         return false;
 }
 
