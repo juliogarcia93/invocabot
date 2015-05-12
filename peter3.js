@@ -61,40 +61,29 @@ var targetnumber = "***REMOVED***";
 var gateway = "gw_outbound";
 var originate_options = "ignore_early_media=true";
 
-// session.execute("record_session", "/tmp/foo.wav")
+session.execute("record_session", "/tmp/foo.wav")
 
-// outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
-session1 = new Session();
-
-session1 = new Session();
-session1.originate(session1, "{ignore_early_media=true}sofia/gateway/gw_outbound/***REMOVED***");
-session1.execute("bridge", "sofia/gateway/gw_outbound/***REMOVED***");
-
-while (session1.ready() && session2.ready()) { 
-    session1.execute("detect_speech", "pocketsphinx invocabot invocabot");
-    ttsSpeak(session2, "The call is currently being recorded");
-    while (session.ready()) {
-      session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-    }
-}
+outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
 
 
-// if (session.ready()){
-//         session.answer();
-//         session.execute("sleep", "5000");
-//         session.execute("detect_speech", "pocketsphinx invocabot invocabot");
-//         session.execute("divert_events", "on");
+
+if (session.ready()){
+        session.answer();
+        session.execute("sleep", "5000");
+        session.execute("detect_speech", "pocketsphinx invocabot invocabot");
+        session.execute("divert_events", "on");
         
-//         if (outSession.ready()) {
-//         //     outSession.answer();
-//         bridge(session, outSession);
-// 	    ttsSpeak(outSession, "The call is currently being recorded");
-//         console_log("CONSOLE", "The call is currently being recorded");
+        if (outSession.ready()) {
+        //     outSession.answer();
+        //bridge(session, outSession);
+        session.execute("bridge", "sofia/gateway/gw_outbound/***REMOVED***");
+	    ttsSpeak(outSession, "The call is currently being recorded");
+        console_log("CONSOLE", "The call is currently being recorded");
 
-//         while (session.ready()) {
-//           session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-//         }
-//     }
+        while (session.ready()) {
+          session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+        }
+    }
     
 
-// }
+}
