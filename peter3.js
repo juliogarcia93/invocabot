@@ -77,12 +77,12 @@ if (session.ready()){
         if (outSession.ready()) {
         //     outSession.answer();
         bridge(session, outSession, bridgeCallback);
-	    ttsSpeak(outSession, "The call is currently being recorded");
-        console_log("CONSOLE", "The call is currently being recorded");
+	    // ttsSpeak(outSession, "The call is currently being recorded");
+     //    console_log("CONSOLE", "The call is currently being recorded");
 
-        while (session.ready()) {
-          session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
-        }
+     //    while (session.ready()) {
+     //      session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+     //    }
     }
     
 
