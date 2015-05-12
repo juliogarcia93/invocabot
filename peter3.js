@@ -64,7 +64,7 @@ var originate_options = "ignore_early_media=true";
 // session.execute("record_session", "/tmp/foo.wav")
 
 // outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
-
+session = new Session();
 
 session1 = new Session();
 session.originate(session1, "{ignore_early_media=true}sofia/gateway/gw_outbound/***REMOVED***");
