@@ -14,7 +14,7 @@ function ttsSpeak (session, phrase) {
 	session.speak(ttsengine, ttsvoice, phrase, ttstimer);
 }
 
-function halfVolume() {
+function halfVolume(session, type, data, arg) {
 	return ( "volume:-2");
 }
 
