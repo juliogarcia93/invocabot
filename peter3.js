@@ -14,6 +14,10 @@ function ttsSpeak (session, phrase) {
 	session.speak(ttsengine, ttsvoice, phrase, ttstimer);
 }
 
+function halfVolume() {
+	return ( "volume:-2");
+}
+
 
 function onInput(session, type, data, arg) {
 
@@ -31,14 +35,14 @@ function onInput(session, type, data, arg) {
 	{
 		command = result.getChild('interpretation').getChild('input').data;
 		if (command.indexOf('INVOCABOT') > -1 && !invocabot) {
-			session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_s.wav");
+			session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_s.wav", halfVolume);
 			invocabot = true;
 		}
 		else if (command != "") {
 			//session.execute("sleep", "2000");
 			// newCommand = command.slice(10);
 			if (invocabot) {
-				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav");
+				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav", halfVolume);
 				invocabot = false;
 			}
 			console_log("CONSOLE", "Command: " + command);
