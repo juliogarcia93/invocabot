@@ -45,7 +45,7 @@ function onInput(session, type, data, arg) {
 				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e.wav", halfVolume);
 				invocabot = false;
 				e = new Event("custom", "message");
-				e.addBody(command);
+				e.addBody(session.uuid + command);
 				e.fire();
 			}
 		}
@@ -65,6 +65,9 @@ function bridgeCallback ( session, type, dtmf, user_data) {
 var targetnumber = "***REMOVED***";
 var gateway = "gw_outbound";
 var originate_options = "ignore_early_media=true";
+
+var eh = new EventHandler('ALL');
+var evt;
 
 session.execute("record_session", "/tmp/foo.wav")
 
@@ -86,6 +89,11 @@ if (session.ready()){
 
 	while (session.ready()) {
 		session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+	
+	   evt = eh.getEvent(60000);
+	   if (evt){
+       		consoleLog('info', 'Got event: ' + evt.serialize() + '\n');
+   		}
 	}
 	//	}
 
