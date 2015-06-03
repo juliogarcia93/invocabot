@@ -16,7 +16,7 @@ function ttsSpeak (session, phrase) {
 }
 
 function halfVolume(session, type, data, arg) {
-	return ( "volume:-2");
+	return ( "volume:-1");
 }
 
 
@@ -37,7 +37,6 @@ try {
 	if (result)
 	{
 		command = result.getChild('interpretation').getChild('input').data;
-		console_log("CONSOLE", command);
 		command.replace("INVOCABOT1", "INVOCABOT");
 		command.replace("INVOCABOT2", "INVOCABOT");
 		command.replace("INVOCABOT3", "INVOCABOT");
@@ -45,20 +44,21 @@ try {
 		command.replace("INVOCABOT5", "INVOCABOT");
 		command.replace("INVOCABOT6", "INVOCABOT");
 		command.replace("INVOCABOT7", "INVOCABOT");
+	        console_log("CONSOLE", command);
 		if (command.indexOf('INVOCABOT') > -1 && !invocabot) {
-			session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/beep_s.wav", halfVolume);
+			session.streamFile("/usr/local/freeswitch/sounds/siri_start.mp3");
 			invocabot = true;
 		}
 		else if (command != "") {
 			//session.execute("sleep", "2000");
 			// newCommand = command.slice(10);
 			if (invocabot) {
-				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/beep_e.wav", halfVolume);
+				session.streamFile("/usr/local/freeswitch/sounds/siri_end.mp3");
 				invocabot = false;
 				e = new Event("custom", "message");
 				e.addBody(session.uuid + " " + command);
 				e.fire();
-				if (command.indexOf('APPOINTMENT') > -1 || command.indexOf('MEETING') > -1) {
+				if (command.indexOf('APPOINTMENT') > -1 || command.indexOf('MEETING') > -1 || command.indexOf('SET UP') > -1) {
 				    var time = "";
 				    if (command.indexOf('ONE') > -1)
 					time = "ONE";
@@ -123,8 +123,8 @@ try {
 
 function bridgeCallback ( session, type, dtmf, user_data) {
 	console_log("CONSOLE", "BEGINNING VOICE RECOGNITION");
-	session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput);
-	return false;
+	session.streamFile(argv[0], onInput);
+	return true;
 }
 
 /***************** Begin Program *****************/
@@ -143,18 +143,19 @@ outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+tar
 
 if (session.ready()){
 	session.answer();
-	session.execute("sleep", "5000");
+//        session.execute("avmd", "start");
 	session.execute("detect_speech", "pocketsphinx invocabot invocabot");
 	session.execute("divert_events", "on");
 
 	if (outSession.ready()) {
 	    outSession.answer();
-	    bridge(session, outSession, bridgeCallback);
 	    ttsSpeak(outSession, "The call is currently being recorded");
 	    console_log("CONSOLE", "The call is currently being recorded");
+	    bridge(session, outSession, onInput);
+
 
 	while (session.ready()) {
-		session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav", onInput); 
+		session.streamFile(argv[0], onInput); 
 	    session.execute("detect_speech", "resume");
 //	   evt = eh.getEvent(60000);
 //	   if (evt){
