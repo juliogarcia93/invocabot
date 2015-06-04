@@ -16,7 +16,7 @@ function ttsSpeak (session, phrase) {
 }
 
 function halfVolume(session, type, data, arg) {
-	return ( "volume:-1");
+	return ( "volume:+2");
 }
 
 
@@ -46,14 +46,15 @@ try {
 		command.replace("INVOCABOT7", "INVOCABOT");
 	        console_log("CONSOLE", command);
 		if (command.indexOf('INVOCABOT') > -1 && !invocabot) {
-			session.streamFile("/usr/local/freeswitch/sounds/siri_start.mp3");
+			session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_s2.wav");
 			invocabot = true;
 		}
 		else if (command != "") {
 			//session.execute("sleep", "2000");
 			// newCommand = command.slice(10);
 			if (invocabot) {
-				session.streamFile("/usr/local/freeswitch/sounds/siri_end.mp3");
+			        session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/silence.wav");
+				session.streamFile("/usr/local/freeswitch/sounds/en/us/invocabot/siri_e2.wav");
 				invocabot = false;
 				e = new Event("custom", "message");
 				e.addBody(session.uuid + " " + command);
@@ -135,7 +136,7 @@ var originate_options = "ignore_early_media=true";
 var eh = new EventHandler('ALL');
 var evt;
 
-session.execute("record_session", "/tmp/foo.wav");
+//session.execute("record_session", "/tmp/foo.wav");
 
 outSession = new Session("{"+originate_options+"}sofia/gateway/"+gateway+"/"+targetnumber);
 
