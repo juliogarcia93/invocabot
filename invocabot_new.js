@@ -129,7 +129,7 @@ function bridgeCallback ( session, type, dtmf, user_data) {
 }
 
 /***************** Begin Program *****************/
-var targetnumber = "***REMOVED***";
+var targetnumber = "";
 var gateway = "gw_outbound";
 var originate_options = "ignore_early_media=true";
 
